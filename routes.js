@@ -75,4 +75,5 @@ module.exports = function (app) {
 
 	// Upload image of node.
 	app.post('/api/upload/image', api.post_api_node_upload_image);
+	
 };
