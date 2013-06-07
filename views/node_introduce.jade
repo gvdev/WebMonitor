@@ -1,0 +1,58 @@
+// TODO: To erase when the extraction of data works for the serial port.
+extends layout
+
+block content
+	div(class="row")
+		div(class="span4",ng-controller="introduce1")
+			label Node ID:
+			input(type="text",class="input-block-level",value="{{node.node_id}}",ng-model="node.node_id")
+
+			label Description:
+			input(type="text",class="input-block-level",value="{{node.description}}",ng-model="node.description")
+
+			label Inputs:
+			input(type="text",class="input-block-level",value="{{node.inputs}}",ng-model="node.inputs")
+
+			label Adc1:
+			input(type="text",class="input-block-level",value="{{node.adc1}}",ng-model="node.adc1")
+
+			label Adc2:
+			input(type="text",class="input-block-level",value="{{node.adc2}}",ng-model="node.adc2")
+
+			label Adc3:
+			input(type="text",class="input-block-level",value="{{node.adc3}}",ng-model="node.adc3")
+
+			label Adc4:
+			input(type="text",class="input-block-level",value="{{node.adc4}}",ng-model="node.adc4")
+
+			label Battery Level:
+			input(type="text",class="input-block-level",value="{{node.battery_level}}",ng-model="node.battery_level")
+
+			button(class="btn btn-primary",ng-click="introduce_node(node)") Execute
+
+		div(class="span4",ng-controller="introduce2")
+			label Node ID:
+			input(type="text",class="input-block-level",value="{{node.node_id}}",ng-model="node.node_id")
+
+			label Description:
+			input(type="text",class="input-block-level",value="{{node.description}}",ng-model="node.description")
+
+			label Inputs:
+			input(type="text",class="input-block-level",value="{{node.inputs}}",ng-model="node.inputs")
+
+			label Adc1:
+			input(type="text",class="input-block-level",value="{{node.adc1}}",ng-model="node.adc1")
+
+			label Adc2:
+			input(type="text",class="input-block-level",value="{{node.adc2}}",ng-model="node.adc2")
+
+			label Adc3:
+			input(type="text",class="input-block-level",value="{{node.adc3}}",ng-model="node.adc3")
+
+			label Adc4:
+			input(type="text",class="input-block-level",value="{{node.adc4}}",ng-model="node.adc4")
+
+			label Battery Level:
+			input(type="text",class="input-block-level",value="{{node.battery_level}}",ng-model="node.battery_level")
+
+			button(class="btn btn-primary",ng-click="introduce_node(node)") Execute

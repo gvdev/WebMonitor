@@ -1,0 +1,42 @@
+{
+	"database"	: {
+		"host"	: "localhost",
+		"name"	: "web_monitor",
+		"user"	: "admin",
+		"pass"	: "admin",
+		"port"	: ""
+	},
+	"website"				: {
+		"port"				: 3000,
+		"super_admin"		: {
+			"name"			: "admin@root",
+			"password"		: "admin505"
+		},
+		"name"				: "Web Monitor"
+	},
+	"gauge"					: {
+		"min"				: "0",
+		"max"				: "4000"
+	},
+	"battery"				: {
+		"min"				: "2150",
+		"max"				: "3000"
+	},
+	"factor"				: 100,
+	"system"				: {
+		"log_dir"			: "/var/log/wm_log"
+	},
+	"mailer"				: {
+		"host"				: "",
+		"secureConnection"	: false,
+		"port"				: "25",
+		"transport"			: "SMTP",
+		"from"				: "",
+		"domain"			: "",
+		"authentication"	: "",
+		"username"			: "",
+		"password"			: "",
+		"is_gmail"			: false,
+		"active"			: false
+	}
+}

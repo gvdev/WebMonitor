@@ -1,0 +1,186 @@
+extends layout
+
+block content
+	div(class="tabbable")
+		ul(class="nav nav-tabs")
+			li(class="active")
+				a(href="#lA",data-toggle="tab") Configuration
+			li()
+				a(href="#lB",data-toggle="tab") Users
+			li()
+				a(href="#lC",data-toggle="tab") Logs
+
+		div(class="tab-content")
+			div(class="tab-pane active",id="lA",ng-controller="configuration")
+				div(class="row")
+					form(name="config_gauge")
+						div(class="span3")
+							legend(class="label label-info") Gauges
+							p(class="muted") Set the maximum value of the gauges.
+							div(class="control-group")
+								label(class="control-label",for="max_value") Maximum value.
+								span(class="label label-important",ng-show="config_gauge.gauge_max.$error.required")  required number
+								div(class="controls")
+									input(type="number",name="gauge_max",ng-model="config.gauge.max",value="config.gauge.max",required)
+					
+						div(class="span3")
+							legend(class="label label-info") Multiplication factor
+							p(class="muted") For dispaly values in website in range (x/factor).
+								div(class="control-group")
+									label(class="control-label",for="factor") Factor.
+									span(class="label label-important",ng-show="config_gauge.factor.$error.required")  required number
+									div(class="controls")
+										input(type="number",name="factor",ng-model="config.factor",value="config.factor",required)
+
+						div(class="span3")
+							legend(class="label label-info") Battery
+							div(class="control-group")
+								label(class="control-label",for="min_value") Alert if battery level drops bellow.
+								span(class="label label-important",ng-show="config_gauge.battery_min.$error.required")  required number
+								div(class="controls")
+									input(type="number",name="battery_min",ng-model="config.battery.min",value="config.battery.min",required)
+									
+							div(class="control-group")
+								label(class="control-label",for="battery_max") Maximum possible value.
+								span(class="label label-important",ng-show="config_gauge.battery_max.$error.required")  required number
+								div(class="controls")
+									input(type="number",name="battery_max",ng-model="config.battery.max",value="config.battery.max",required)
+									
+						div(class="span10")
+							legend(class="label label-info") Inputs
+							p(class="muted") For dispaly information when on pass with mouse upper a input in client.
+							
+							div(class="control-group span3")
+								label(class="control-label",for="input1") Input 1.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input1") config.inputs.input1
+										
+							div(class="control-group span3")
+								label(class="control-label",for="input2") Input 2.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input2") config.inputs.input2
+									
+							div(class="control-group span3")
+								label(class="control-label",for="input3") Input 3.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input3") config.inputs.input3
+									
+							div(class="control-group span3")
+								label(class="control-label",for="input4") Input 4.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input4") config.inputs.input4
+									
+							div(class="control-group span3")
+								label(class="control-label",for="input5") Input 5.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input5") config.inputs.input5
+									
+							div(class="control-group span3")
+								label(class="control-label",for="input6") Input 6.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input6") config.inputs.input6
+									
+							div(class="control-group span3")
+								label(class="control-label",for="input7") Input 7.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input7") config.inputs.input7
+									
+							div(class="control-group span3")
+								label(class="control-label",for="input8") Input 8.
+								div(class="controls")
+									textarea(rows="3",ng-model="config.inputs.input8") config.inputs.input8
+
+									
+
+				div(class="control-group")
+					div(class="controls")
+						button(type="submit",class="btn btn-primary",ng-disabled="!config_gauge.$valid",ng-click="submit_config(config)") Save all
+
+			div(class="tab-pane",id="lB",ng-controller="users_all")
+				div(class="span9")
+					table(class="table table-hover")
+						thead
+							tr
+								th Username
+								th Name
+								th Last name
+								th Added
+								th Admin?
+								if(user.is_admin)
+									th Actions
+						tbody
+							tr(ng-repeat="user in users",ng-click="show_edit(user)")
+								td
+									edit-inplace(on-save="save(newVal)",edit="user.email")
+								td
+									edit-inplace(on-save="save(newVal)",edit="user.name")
+								td
+									edit-inplace(on-save="save(newVal)",edit="user.last_name")
+								td {{user.created | date:'MM/dd/yyyy h:mma'}}
+								td(ng-show="user.is_admin")
+									if (user.is_admin)
+										i(class="icon-ok",ng-click="change_role(user._id)")
+									else
+										i(class="icon-ok")
+								td(ng-hide="user.is_admin")
+									if (user.is_admin)
+										i(class="icon-remove",ng-click="change_role(user._id)")
+									else
+										i(class="icon-remove")
+								if(user.is_admin)
+									td
+										button(type="button",class="btn btn-primary btn-mini",ng-click="edit(user)") Edit
+										button(type="button",class="btn btn-danger btn-mini",ng-click="delete(user)") Delete
+
+				if(user.is_admin)
+					div(class="span2")
+						form(name="add_user")
+							legend(class="label label-info") Add User
+							div(class="control-group")
+								span(class="label label-important",ng-show="add_user.email.$error.email")  required email
+								div(class="controls")
+									input(type="email",class="span2",name="email",ng-model="user.email",placeholder="Email",required)
+
+							div(class="control-group")
+								div(class="controls")
+									input(type="text",class="span2",name="name",ng-model="user.name",placeholder="Name")
+
+							div(class="control-group")
+								div(class="controls")
+									input(type="text",class="span2",name="last_name",ng-model="user.last_name",placeholder="Last name")
+
+							label(class="checkbox") Is admin?
+								input(type="checkbox",ng-model="user.is_admin")
+
+							hr
+
+							div(class="control-group")
+								label(class="control-label",for="min_value") Password.
+								span(class="label label-important",ng-show="add_user.password.$error.required")  required password
+								div(class="controls")
+									input(type="password",class="span2",name="password",ng-model="user.password",value="",required)
+
+							div(class="control-group")
+								div(class="controls")
+									button(type="submit",class="btn btn-primary",ng-disabled="!add_user.$valid",ng-click="add(user)") Add
+
+			div(class="tab-pane",id="lC",ng-controller="process_log")
+				table(class="table")
+					thead
+						tr
+							th Added
+							th Type
+							th IP
+							th Method
+							th Log
+								button(class="btn btn-small btn-primary pull-right",type="button",ng-click="logs_refresh()") Refresh
+
+					tbody
+						tr(ng-repeat="log in logs",ng:class="{true:'success', false:'error'}[log.success]")
+							td {{log.datetime | date:'MM/dd/yyyy h:mm:ssa'}}
+							td {{log.type}}
+							td {{log.ip}}
+							td {{log.method}}
+							td {{log.msg}}
+
+				button(class="btn btn-small btn-block btn-primary",type="button",ng-click="infinite_scroll()") More

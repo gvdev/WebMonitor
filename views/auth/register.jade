@@ -1,0 +1,34 @@
+.modal-header.btn-primary
+	button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+	h3#myModalLabel Sig up in VideoShare
+
+.modal-body
+	form(id="form-signup",class="form-horizontal",action="/auth/register",method="post")
+		label.control-label(for="first_name") First Name <span class="color-red">*</span>
+		div.controls()
+			input#first_name(required,type="text",name="first_name",placeholder="First Name")
+
+		br
+		label.control-label(for="last_name") Last Name <span class="color-red">*</span>
+		div.controls()
+			input#last_name(required,type="text",name="last_name",placeholder="Last Name")
+		br
+
+		label.control-label(for="username") Email <span class="color-red">*</span>
+		div.controls()
+			input#username(required,type="email",name="username",placeholder="Email")
+		br
+
+		label.control-label(for="password") Password <span class="color-red">*</span>
+		div.controls()
+			input#password(required,type="password",name="password",placeholder="Password")
+		br
+
+		label.control-label(for="password_again") Password (again) <span class="color-red">*</span>
+		div.controls()
+			input#password_again(required,type="password",name="password_again",placeholder="Password (again)")
+		br
+
+.modal-footer
+	button(class="btn",data-dismiss="modal") Cancel
+	button(class="btn btn-primary", onclick="$('#form-signup').submit()") Sign up

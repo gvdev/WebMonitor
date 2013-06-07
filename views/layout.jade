@@ -1,0 +1,65 @@
+doctype 5
+html(lang="en",ng-app="web_monitor",ng-cloak)
+	head
+		block title
+			title Web Monitor: Welcome
+		meta(name="viewport",content="width=device-width, initial-scale=1.0")
+
+		link(rel="shortcut icon",href="/images/favicon.png")
+
+		link(rel='stylesheet', href='/third-party/twitter-bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/third-party/twitter-bootstrap/css/bootstrap-responsive.css')
+		link(rel='stylesheet', href='/third-party/jQuery-UI-FileInput/css/enhanced.css')
+
+		// not show flash of uncompiled content.
+		style
+			[ng-cloak] {
+				display: none;
+				}
+
+	body
+		block navbar_header
+			div(class="navbar navbar-inverse navbar-fixed-top")
+				div(class="navbar-inner navbar-inverse")
+					div(class="nav-collapse collapse")
+						ul(class="nav")
+							li(class="")
+								a(class="brand")
+									span(id="state-connection",class="label",style="margin-left:70px") Waiting
+
+					div(class="container")
+						a(class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
+							span(class="icon-bar")
+							span(class="icon-bar")
+							span(class="icon-bar")
+						a(class="brand",href="/") Web Monitor
+
+						if(user)
+							div(class="nav-collapse collapse")
+								ul(class="nav")
+									li(class="")
+										a(href="/config") Configuration
+							ul(class="nav pull-right")
+								li(class="dropdown")
+									a(class="dropdown-toggle",data-toggle="dropdown",href="#") #{user.name}
+										b(class="caret")
+									ul(class="dropdown-menu")
+										li
+											a(href="/auth/logout") Logout
+
+						else
+							include ./auth/login
+
+		div(class="container marketing")
+			block content
+
+		div(id="flash_message")
+
+		block footer
+			footer(class="footer")
+				div(class="container")
+					p(class="pull-right")
+						a(href="#") Back to top
+
+		include scripts

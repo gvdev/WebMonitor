@@ -1,0 +1,25 @@
+{
+	"name"        : "Web Monitor",
+	"version"     : "0.0.1",
+	"private"     : true,
+	"scripts"     : {
+		"start": "node app"
+	},
+	"dependencies": {
+		"express"                : "~3.1.0",
+		"jade"                   : "~0.28.1",
+		"passport"               : "*",
+		"passport-local"         : "*",
+		"passport-local-mongoose": "*",
+		"mongoose"               : "3.4.x",
+		"socket.io"              : "~0.9.13",
+		"winston"                : "~0.6.2",
+		"serialport"			 : "*",
+		"events"                 : "*",
+		"cron"					 : "*"
+	},
+	"engines"     : {
+		"node": "0.6.x",
+		"npm" : "1.1.x"
+	}
+}
