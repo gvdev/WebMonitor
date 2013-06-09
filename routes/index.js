@@ -136,11 +136,51 @@ module.exports = {
 	/**
 	 * Inputs.
 	 */
-	
+
+	/**
+	 * Get node to modify and change value of slider pwm.
+	 *
+	 * @param io
+	 * @param client
+	 * @param data json example:
+	 * {value: 15, node_id: FFFF33AABB00, user: {email: admin@root.root}}
+	 */
+	change_value_slider_pwm: function (io, client, data) {
+		// Run dynamic event, to send the web customer table.
+		// EventEmitter -> require('events').
+		// The event.js is in ./web_monitor/routes/event.js
+		var new_event = new event();
+
+		// Event listener return table object.
+		new_event.on('open', function (table) {
+
+			// Get node to modify.
+			var line = table[data.node_id];
+
+			// Actual value of pwm.
+			var actual_pwm = line[line.length-1];
+
+			if (actual_pwm != data.value) {
+				// Change pwm in node - line.
+				line[line.length-1] = data.value;
+				table[data.node_id] = line;
+
+				// Log.
+				var address = client.handshake.address;
+				log.save('information', address.address, 'websocket', 'change pwm value of node ' + data.node_id + ' of ' + actual_pwm + ' at ' + data.value + '.', data.user);
+
+				new_event.emit('update client', {node: line, update: 1});
+			}
+		});
+	},
+
 	/**
 	 * Get node to modify and change its state of inputs.
 	 *
-	 * @param data
+	 * @param io
+	 * @param client
+	 * @param data json example:
+	 * {position: 1, value: 0, node_id: FFFF33AABB00, user: {email: admin@root.root}}
 	 */
 	change_state_input: function (io, client, data) {
 

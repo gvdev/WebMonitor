@@ -9,6 +9,7 @@
  * Upload images of nodes.
  */
 web_monitor.directive('upload', function() {
+
 	var linker = function ($scope, $element) {
 
 		$scope.load = false;
@@ -50,13 +51,13 @@ web_monitor.directive('upload', function() {
 	};
 
 	return {
-		restrict: 'E',
-		transclude: true,
-		template: '<div><input type="file" class="file_input" /></div>',
-		controller: controller,
-		link: linker,
-		$scope: {
-			node: '='
+		restrict	: 'E',
+		transclude	: true,
+		template	: '<div><input type="file" class="file_input" /></div>',
+		controller	: controller,
+		link		: linker,
+		$scope		: {
+			node	: '='
 		}
 	};
 });

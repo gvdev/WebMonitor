@@ -45,10 +45,10 @@ setInterval(function () {
  */
 function flash_message_launch (message) {
 	if (message.type == 'error') {
-		flash_message(message.msg, message.type, 'top', 2000);
+		flash_message(message.msg, message.type, 'top', 4000);
 	}
 	if (message.type == 'success') {
-		flash_message(message.msg, message.type, 'top', 2000);
+		flash_message(message.msg, message.type, 'top', 4000);
 	}
 }
 
@@ -68,7 +68,7 @@ function flash_message(msg, type, layout, interval) {
 			layout: layout,
 			theme: 'defaultTheme'
 		},
-		setInterval(function() {
+		setTimeout(function() {
 			$.noty.closeAll(n.options.id);
 		}, interval)
 	);

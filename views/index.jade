@@ -25,6 +25,14 @@ block content
 				else
 					inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="")
 
+				br
+				h8 PWM:
+				small(id="pwm_{{node.node_id}}") {{node.pwm}}
+				if (user)
+					div(pwm,value="node.pwm",user="'#{user.email}'",node="node.node_id",ng-mouseout="change_value(node, '#{user.email}')")
+				else
+					div(pwm,value="node.pwm",user="",node="node.node_id",ng-click="change_value(node, '')")
+
 			div(class="span3")
 				canvas(gauge,ng-repeat="adc in node.adcs",adc="adc",width="110",height="120")
 				

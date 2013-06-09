@@ -62,6 +62,7 @@ web_monitor.controller('update_node', function ($scope, $element, $compile, sock
 				node.max 			= data.line_return.max;
 				node.last_received 	= data.line_return.last_received;
 				node.img			= data.line_return.img;
+				node.pwm			= data.line_return.pwm;
 			}
 		});
 
