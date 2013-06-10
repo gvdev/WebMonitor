@@ -23,18 +23,17 @@ html(lang="en",ng-app="web_monitor",ng-cloak)
 		block navbar_header
 			div(class="navbar navbar-inverse navbar-fixed-top")
 				div(class="navbar-inner navbar-inverse")
-					div(class="nav-collapse collapse")
-						ul(class="nav")
-							li(class="")
-								a(class="brand")
-									span(id="state-connection",class="label",style="margin-left:70px") Waiting
-
+				
 					div(class="container")
 						a(class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
 							span(class="icon-bar")
 							span(class="icon-bar")
 							span(class="icon-bar")
 						a(class="brand",href="/") Web Monitor
+
+						ul(class="nav")
+							li(class="dropdown")
+								span(id="state-connection",class="label") Waiting
 
 						if(user)
 							div(class="nav-collapse collapse")
@@ -52,7 +51,7 @@ html(lang="en",ng-app="web_monitor",ng-cloak)
 						else
 							include ./auth/login
 
-		div(class="container marketing")
+		div(class="container")
 			block content
 
 		div(id="flash_message")

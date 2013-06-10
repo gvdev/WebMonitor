@@ -1,11 +1,21 @@
 body {
-	padding-top    : 60px;
-	padding-bottom : 40px;
+	padding-top         : 60px;
 	
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
+
+	-moz-user-select    : none;
+	-khtml-user-select  : none;
+	-webkit-user-select : none;
+	user-select         : none;
+}
+
+.node {
+	padding : 5px 5px 5px;
+	border  : 1px solid #E5E5E5;
+}
+
+.node-img {
+	max-width  : 70px;
+	max-height : 60px;
 }
 
 .nodes {
@@ -19,4 +29,18 @@ body {
 	-webkit-box-shadow    : 0 1px 2px rgba(0, 0, 0, .05);
 	-moz-box-shadow       : 0 1px 2px rgba(0, 0, 0, .05);
 	box-shadow            : 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.battery {
+	margin-bottom : 0px;
+	max-width     : 200px;
+	font-size     : 10px;
+}
+
+.pwm {
+	max-width  : 80%;
+}
+
+.connection {
+	color: white;
 }

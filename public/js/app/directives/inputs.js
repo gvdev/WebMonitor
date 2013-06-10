@@ -41,18 +41,18 @@ web_monitor.directive('inputs', function ($compile, $http) {
 				// ng-click="change_state(...)" is a function to change the state of input.
 				if (str_input[i] == '0') {
 					if (scope.user) {
-						append = append + '<span class="btn btn-mini" title="' + get_info[i] + '" ng-click="change_state(' + i + ', ' + str_input[i] + ', ' + "'" + scope.node_id + "'" + ', ' + "'" + scope.user + "'" + ')">' + count + '</span>  ';
+						append = append + '<span class="btn btn-small" title="' + get_info[i] + '" ng-click="change_state(' + i + ', ' + str_input[i] + ', ' + "'" + scope.node_id + "'" + ', ' + "'" + scope.user + "'" + ')">' + count + '</span>  ';
 						element.html(append);
 					} else {
-						append = append + '<span class="btn btn-mini" title="' + get_info[i] + '" ng-click="show_error()">' + count + '</span>  ';
+						append = append + '<span class="btn btn-small" title="' + get_info[i] + '" ng-click="show_error()">' + count + '</span>  ';
 						element.html(append);
 					}
 				} else if (str_input[i] == '1') {
 					if (scope.user) {
-						append = append + '<span class="btn btn-mini btn-danger" title="' + get_info[i] + '" ng-click="change_state(' + i + ', ' + str_input[i] + ', ' + "'" + scope.node_id + "'" + ', ' + "'" + scope.user + "'" + ')">' + count + '</span>  ';
+						append = append + '<span class="btn btn-small btn-danger" title="' + get_info[i] + '" ng-click="change_state(' + i + ', ' + str_input[i] + ', ' + "'" + scope.node_id + "'" + ', ' + "'" + scope.user + "'" + ')">' + count + '</span>  ';
 						element.html(append);
 					} else {
-						append = append + '<span class="btn btn-mini btn-danger" title="' + get_info[i] + '" ng-click="show_error()">' + count + '</span>  ';
+						append = append + '<span class="btn btn-small btn-danger" title="' + get_info[i] + '" ng-click="show_error()">' + count + '</span>  ';
 						element.html(append);
 					}
 				}

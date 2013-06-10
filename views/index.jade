@@ -1,47 +1,46 @@
 extends layout
 
 block content
-	div(class="row",ng-controller="update_node")
-		div(class="span3 nodes",ng-repeat="node in nodes",data-toggle="context",data-target="#context_{{node.node_id}}")
-			div(class="span2 pull-right")
-				battery(node="{{node}}")
-			div(class="span1")
-				h7 Node ID:
-				strong  {{node.name}}
-				br
-				strong {{node.node_id}}
-				br
-				h7 Last Received: 
-				small {{node.last_received | date:'MM/dd/yyyy h:mm:ssa'}}
-			div(class="span1 pull-right")
-				img(ng-src="{{node.img}}",class="img-rounded",width="200",height="150")
+	div(class="row-fluid",ng-controller="update_node")
+		div(class="span4 node",ng-repeat="node in nodes",data-toggle="context",data-target="#context_{{node.node_id}}")
+			.row-fluid
+				.span7
+					abbr(title="Last Received",class="initialism") {{node.last_received | date:'MM/dd/yyyy h:mm:ssa'}}
+				.span5
+					battery(node="{{node}}")
+			.row-fluid
+				.span6
+					img(alt="",ng-src="{{node.img}}",class="pull-left",class="node-img")
+					strong {{node.node_id}}
+					hr
+					
+				.span6
+					p {{node.name}}
 
-			br
-			div(class="span3")
-				h8 INPUT
-				br
-				if (user)
-					inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="{{'#{user.email}'}}")
-				else
-					inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="")
-
-				br
-				h8 PWM:
-				small(id="pwm_{{node.node_id}}") {{node.pwm}}
-				if (user)
-					div(pwm,value="node.pwm",user="'#{user.email}'",node="node.node_id",ng-mouseout="change_value(node, '#{user.email}')")
-				else
-					div(pwm,value="node.pwm",user="",node="node.node_id",ng-click="change_value(node, '')")
-
-			div(class="span3")
-				canvas(gauge,ng-repeat="adc in node.adcs",adc="adc",width="110",height="120")
-				
+			.row-fluid
+				.span12
+					if (user)
+						inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="{{'#{user.email}'}}")
+					else
+						inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="")
+						
+				.span12
+					h8 PWM: &nbsp;
+					small(id="pwm_{{node.node_id}}",class="text-info") {{node.pwm}}
+					if (user)
+						div(pwm,value="node.pwm",class="pwm",user="'#{user.email}'",node="node.node_id",ng-mouseout="change_value(node, '#{user.email}')")
+					else
+						div(pwm,value="node.pwm",class="pwm",user="",node="node.node_id",ng-click="change_value(node, '')")
+						
+				.span12
+					canvas(gauge,ng-repeat="adc in node.adcs",adc="adc",width="110",height="120")
+					
 			div(id="context_{{node.node_id}}")
 				if(user)
 					ul(class="dropdown-menu",role="menu")
 						li
 							a(tabindex="-1",href="#modal_upload_{{node.node_id}}",data-toggle="modal") Upload Photo
-						
+
 			div(id="modal_upload_{{node.node_id}}",class="modal hide fade",tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true")
 				div(class="modal-header btn-inverse")
 					button(type="button",class="close",data-dismiss="modal",aria-hidden="true") x
@@ -49,13 +48,16 @@ block content
 
 				div(class="modal-body")
 
-					div(class="row")
-						div(class="span3")
+					.row-fluid
+						.span5
 							upload(node="node")
-						div(class="span2")
+							
+						.span2
+						
+						.span5
 							img(ng-show="load",ng-src="{{src}}")
 							img(ng-hide="load",ng-src="/img/generic.jpg")
-					
+
 				div(class="modal-footer")
 					button(class="btn",data-dismiss="modal",aria-hidden="true") Close
 					button(class="btn btn-primary",data-dismiss="modal",aria-hidden="true",ng-click="upload()") Upload

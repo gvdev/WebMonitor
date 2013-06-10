@@ -19,12 +19,12 @@ web_monitor.directive('battery', function () {
 			var percent_min = (node.battery_min * 100) / node.battery_max;
 			var percent 	= (node.battery_level * 100) / node.battery_max;
 
-			var progress_h 	= '<div class="progress span2 pull-right">' + node.battery_level;
+			var progress_h 	= '<div class="progress battery">' + node.battery_level;
 
 			var bad_level;
 			if (percent < percent_min) {
 				bad_level = '<div class="bar bar-danger" style="width: ' + percent + '%;"></div>' +
-					'<span style="" class="label label-important pull-right">Low Battery</span>';
+					'<span style="" class="label label-important pull-right">Low</span>';
 			} else {
 				bad_level = '<div class="bar bar-danger" style="width: ' + percent_min + '%;"></div>';
 			}
