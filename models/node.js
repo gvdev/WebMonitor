@@ -195,4 +195,26 @@ Node.statics.all = function (callback) {
 		});
 };
 
+/**
+ * Reset image of node by ID.
+ *
+ * @param node_id
+ * @param callback
+ */
+Node.statics.reset_image = function (node_id, callback) {
+	var this_model = this;
+
+	return this_model.remove({
+		token: node_id
+	}, function (error) {
+		if (!error) {
+
+			callback(null);
+		}
+		else {
+			callback(error);
+		}
+	});
+};
+
 module.exports = mongoose.model('Node', Node);

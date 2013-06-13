@@ -73,6 +73,7 @@ module.exports = function (app) {
 	app.post('/api/log/a_search', ensureAuthenticated, api.post_api_log_a_search);
 
 	// Nodes.
+	app.post('/api/node/reset/image', ensureAuthenticated, api.post_api_node_reset_image);
 
 	// Upload image of node.
 	app.post('/api/upload/image', api.post_api_node_upload_image);

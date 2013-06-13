@@ -218,8 +218,44 @@ module.exports = {
 		}, function (error, data) {
 			if (!error) {
 
+				// Log.
+				log.save('information', req.ip, req.method, 'upload image for node ' + req.body.node_id, object_user);
+
 				socket.export.sockets.emit('update image node', { node_id: data.node_id, image: data.image });
 
+			} else {
+				// Log.
+				log.save('error', req.ip, req.method, 'error while upload image for node ' + req.body.node_id, object_user);
+			}
+		});
+	},
+
+	post_api_node_reset_image: function (req, res) {
+		var object_user = req.user;
+
+		Node.reset_image(req.body.node_id, function (error, data) {
+
+			if (!error) {
+
+				// Log.
+				log.save('information', req.ip, req.method, 'reset image of node ' + req.body.node_id, object_user);
+
+				// Run dynamic event, to send the web customer table.
+				// EventEmitter -> require('events').
+				// The event.js is in ./web_monitor/routes/event.js
+				var new_event = new event();
+
+				// Event listener return table object.
+				new_event.on('open', function (table) {
+
+					// Get node to modify.
+					var line = table[req.body.node_id];
+
+					new_event.emit('update client', {node: line, update: 0});
+				});
+			} else {
+				// Log.
+				log.save('error', req.ip, req.method, 'error while reset image of node ' + req.body.node_id, object_user);
 			}
 		});
 	},

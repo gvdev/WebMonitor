@@ -40,6 +40,8 @@ block content
 					ul(class="dropdown-menu",role="menu")
 						li
 							a(tabindex="-1",href="#modal_upload_{{node.node_id}}",data-toggle="modal") Upload Photo
+						li
+							a(tabindex="-1",ng-click="reset_image(node.node_id)") Reset Photo
 
 			div(id="modal_upload_{{node.node_id}}",class="modal hide fade",tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true")
 				div(class="modal-header btn-inverse")

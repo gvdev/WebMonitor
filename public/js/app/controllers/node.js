@@ -5,7 +5,7 @@
  *
  * @param nodes array.
  */
-web_monitor.controller('update_node', function ($scope, $element, $compile, socket) {
+web_monitor.controller('update_node', function ($scope, $element, $compile, $http, socket) {
 
 	/**
 	 * Receive an array of socket nodes in json format.
@@ -97,4 +97,20 @@ web_monitor.controller('update_node', function ($scope, $element, $compile, sock
 			}
 		});
 	});
+
+	/**
+	 * Reset image of node by ID.
+	 *
+	 * @param node_id
+	 */
+	$scope.reset_image = function (node_id) {
+
+		var send = {
+			node_id: node_id
+		};
+
+		$http.post('/api/node/reset/image', send).success(function (data) {
+			console.log('funciona');
+		});
+	};
 });
