@@ -5,16 +5,16 @@ block content
 		div(class="span4 node",ng-repeat="node in nodes",data-toggle="context",data-target="#context_{{node.node_id}}")
 			.row-fluid
 				.span7
-					abbr(title="Last Received",class="initialism") {{node.last_received | date:'MM/dd/yyyy h:mm:ssa'}}
+					strong {{node.node_id}}
+
 				.span5
 					battery(node="{{node}}")
 			.row-fluid
-				.span6
+				.span5
 					img(alt="",ng-src="{{node.img}}",class="pull-left",class="node-img")
-					strong {{node.node_id}}
-					hr
 					
-				.span6
+				.span7
+					abbr(title="Last Received",class="initialism") {{node.last_received | date:'MM/dd/yyyy h:mm:ssa'}}
 					p {{node.name}}
 
 			.row-fluid
@@ -23,7 +23,7 @@ block content
 						inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="{{'#{user.email}'}}")
 					else
 						inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="")
-						
+
 				.span12
 					h8 PWM: &nbsp;
 					small(id="pwm_{{node.node_id}}",class="text-info") {{node.pwm}}

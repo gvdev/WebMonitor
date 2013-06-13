@@ -9,6 +9,7 @@
  */
 web_monitor.controller('process_log', function ($scope, $http) {
 	$scope.logs = [];
+	$scope.loading = false;
 
 	var skip = 11;
 	var limit = 10;
@@ -47,4 +48,46 @@ web_monitor.controller('process_log', function ($scope, $http) {
 			$scope.logs = data;
 		});
 	};
+	
+	/**
+	 * Advanced search.
+	 */
+	$scope.a_search = function (search) {
+
+		$scope.loading = true;
+
+		if ($('#range').html() != '') {
+			if (!search) {
+				search = {};
+			}
+			search.range = $('#range').html();
+		}
+		
+		$http.post('/api/log/a_search', search).success(function (data) {
+			$scope.logs 	= data;
+			$scope.loading 	= false;
+		});
+	};
+
+	/**
+	 * Remove data of range.
+	 */
+	$scope.remove_criteria_date = function () {
+
+		if ($('#range').html() != '') {
+			$('#range').html('');
+		}
+	};
+
+	/**
+	 * Reset all form search.
+	 */
+	$scope.reset = function () {
+
+		if ($('#range').html() != '') {
+			$('#range').html('');
+		}
+
+		$scope.search = angular.copy({});
+	}
 });

@@ -259,5 +259,21 @@ module.exports = {
 				res.json({});
 			}
 		});
+	},
+	
+	/**
+	 * Advanced search logs.
+	 * 
+	 * @param req
+	 * @param res
+	 */
+	post_api_log_a_search: function (req, res) {
+		Log.a_search(req.body, function (error, docs) {
+			if (!error) {
+				res.json(docs);
+			} else {
+				res.json({});
+			}
+		});
 	}
 };

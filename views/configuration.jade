@@ -165,22 +165,77 @@ block content
 									button(type="submit",class="btn btn-primary",ng-disabled="!add_user.$valid",ng-click="add(user)") Add
 
 			div(class="tab-pane",id="lC",ng-controller="process_log")
-				table(class="table")
-					thead
-						tr
-							th Added
-							th Type
-							th IP
-							th Method
-							th Log
-								button(class="btn btn-small btn-primary pull-right",type="button",ng-click="logs_refresh()") Refresh
+				.row-fluid
+					.span10
+						table(class="table")
+							thead
+								tr
+									th Added
+									th Type
+									th Method
+									th IP
+									th Log
+										div(class="pull-right")
+											small Quick search
+											input(ng-model="find.$")
+											button(class="btn btn-small btn-primary",type="button",ng-click="logs_refresh()") Refresh
 
-					tbody
-						tr(ng-repeat="log in logs",ng:class="{true:'success', false:'error'}[log.success]")
-							td {{log.datetime | date:'MM/dd/yyyy h:mm:ssa'}}
-							td {{log.type}}
-							td {{log.ip}}
-							td {{log.method}}
-							td {{log.msg}}
+							tbody
+								tr(ng-repeat="log in logs | filter:find",ng:class="{true:'success', false:'error'}[log.success]")
+									td {{log.datetime | date:'MM/dd/yyyy h:mm:ssa'}}
+									td {{log.type}}
+									td {{log.method}}
+									td {{log.ip}}
+									td {{log.msg}}
 
-				button(class="btn btn-small btn-block btn-primary",type="button",ng-click="infinite_scroll()") More
+						button(class="btn btn-small btn-block btn-primary",type="button",ng-click="infinite_scroll()") More
+						
+					.span2
+						h5 Advanced Search:
+						form(name="advanced_search")
+							
+							div(class="control-group")
+								label(class="control-label") Date range.
+								div(class="controls")
+									div(class="reportrange span10",style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc")
+										i(class="icon-calendar icon-large")
+										span(id="range")
+										b(lass="caret",style="margin-top: 8px")
+								i(class="icon-remove",ng-click="remove_criteria_date()")
+						
+							br
+							br
+							div(class="control-group")
+								label(class="control-label") Type.
+								div(class="controls")
+									select(ng-model="search.type",class="span10")
+										option(value="") Select Type
+										option(value="error") ERROR
+										option(value="information") INFORMATION
+									
+							div(class="control-group")
+								label(class="control-label") Method.
+								div(class="controls")
+									select(ng-model="search.method",class="span10")
+										option(value="") Select Method
+										option GET
+										option POST
+										option(value="websocket") SOCKET
+
+							div(class="control-group")
+								label(class="control-label") IP.
+								div(class="controls")
+									input(type="text",ng-model="search.ip",class="span10")
+
+							div(class="control-group")
+								label(class="control-label") Some criteria.
+								div(class="controls")
+									input(type="text",ng-model="search.criteria",class="span10")
+									
+							div(class="control-group")
+								div(class="controls")
+									button(type="submit",class="btn btn-small btn-primary",ng-click="a_search(search)") Search
+									button(type="submit",class="btn btn-small btn-danger",ng-click="reset()") Reset
+									br
+									img(src="img/loading.gif",ng-show="loading")
+

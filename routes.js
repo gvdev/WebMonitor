@@ -70,6 +70,7 @@ module.exports = function (app) {
 
 	// Logs
 	app.post('/api/log/scroll', ensureAuthenticated, api.post_api_log_scroll);
+	app.post('/api/log/a_search', ensureAuthenticated, api.post_api_log_a_search);
 
 	// Nodes.
 
