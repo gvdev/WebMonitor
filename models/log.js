@@ -109,12 +109,6 @@ Log.statics.a_search = function (options, callback) {
 		};
 	}
 
-	if (options.criteria) {
-		search.msg = {
-			$in: options.criteria
-		}
-	}
-
 	this_model.find({
 		$or: [
 			search
