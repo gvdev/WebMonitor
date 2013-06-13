@@ -10,6 +10,7 @@
 web_monitor.controller('process_log', function ($scope, $http) {
 	$scope.logs = [];
 	$scope.loading = false;
+	$scope.loading_scroll = false;
 
 	var skip = 11;
 	var limit = 10;
@@ -23,6 +24,9 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	 * Infinite scroll to logs.
 	 */
 	$scope.infinite_scroll = function () {
+
+		$scope.loading_scroll = true;
+
 		$http.post('/api/log/scroll', {skip: skip, limit: limit}).success(function (data) {
 
 			if (data.length > 0) {
@@ -32,7 +36,10 @@ web_monitor.controller('process_log', function ($scope, $http) {
 
 				skip = skip + 10;
 
+				$scope.loading_scroll = false;
+
 			} else {
+				$scope.loading_scroll = false;
 				flash_message_launch({ msg: 'For the moment not more logs find.', type: 'success' });
 			}
 		});
