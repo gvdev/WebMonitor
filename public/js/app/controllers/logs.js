@@ -47,12 +47,31 @@ web_monitor.controller('process_log', function ($scope, $http) {
 
 	/**
 	 * Refresh to show new logs.
-	 */
+	 *//*
 	$scope.logs_refresh = function () {
 		$http.get('/api/log/all').success(function(data) {
 			$scope.logs = [];
 			skip = 11;
 			$scope.logs = data;
+		});
+	};*/
+
+	/**
+	 * Refresh for use infinite scroll directive.
+	 */
+	$scope.logs_refresh = function () {
+
+		var date = new Date();
+		var str_date = date.toString('MM/dd/yyyy');
+		str_date = str_date + ' - ' + str_date;
+
+		var search = {
+			range: str_date
+		}
+
+		$http.post('/api/log/a_search', search).success(function (data) {
+			$scope.logs 	= data;
+			$scope.loading 	= false;
 		});
 	};
 	
