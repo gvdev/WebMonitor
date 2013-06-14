@@ -64,7 +64,7 @@ function flash_message(msg, type, layout, interval) {
 	var n = noty({
 			text: msg,
 			type: type,
-			dismissQueue: true,
+			dismissQueue: false,
 			layout: layout,
 			theme: 'defaultTheme'
 		},

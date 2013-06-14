@@ -51,19 +51,34 @@ web_monitor.directive('pwm', function ($compile) {
 
 		// Change value of pwm.
 		$scope.change_value = function (node, email) {
+			
+			var value = $("#pwm_" + node).html();
 
 			if (email) {
-				var value = $("#pwm_" + node).html();
 
-				socket.emit('change value slider pwm', {
-					value: value,
-					node_id : node,
-					user: {
-						email: email
+				if (value != $scope.value) {
+					
+					socket.emit('change value slider pwm', {
+						value: value,
+						node_id : node,
+						user: {
+							email: email
+						}
+					});
+					
+				};
+			} else {
+				
+				$('#pwmm_' + node).slider({
+					orientation: "horizontal",
+					range: "min",
+					min: 0,
+					max: 100,
+					value: $scope.value,
+					slide: function () {
+						flash_message_launch({ msg: 'You must be logged in to change pwm.', type: 'error' });
 					}
 				});
-			} else {
-				flash_message_launch({ msg: 'You must be logged in to change pwm.', type: 'error' });
 			}
 		};
 	};

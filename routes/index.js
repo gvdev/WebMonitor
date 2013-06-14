@@ -169,7 +169,8 @@ module.exports = {
 				var address = client.handshake.address;
 				log.save('information', address.address, 'websocket', 'change pwm value of node ' + data.node_id + ' of ' + actual_pwm + ' at ' + data.value + '.', data.user);
 
-				new_event.emit('update client', {node: line, update: 1});
+				console.log('PWM: ' + JSON.stringify(line));
+				//new_event.emit('update client', {node: line, update: 1});
 			}
 		});
 	},
