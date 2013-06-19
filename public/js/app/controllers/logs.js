@@ -50,6 +50,8 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	 */
 	$scope.logs_refresh = function () {
 
+		$scope.loading = true;
+
 		var date = new Date();
 		var str_date = date.toString('MM/dd/yyyy');
 		str_date = str_date + ' - ' + str_date;
