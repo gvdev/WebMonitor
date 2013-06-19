@@ -46,17 +46,6 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	};
 
 	/**
-	 * Refresh to show new logs.
-	 *//*
-	$scope.logs_refresh = function () {
-		$http.get('/api/log/all').success(function(data) {
-			$scope.logs = [];
-			skip = 11;
-			$scope.logs = data;
-		});
-	};*/
-
-	/**
 	 * Refresh for use infinite scroll directive.
 	 */
 	$scope.logs_refresh = function () {
@@ -68,6 +57,8 @@ web_monitor.controller('process_log', function ($scope, $http) {
 		var search = {
 			range: str_date
 		}
+
+		this.reset();
 
 		$http.post('/api/log/a_search', search).success(function (data) {
 			$scope.logs 	= data;
@@ -114,6 +105,7 @@ web_monitor.controller('process_log', function ($scope, $http) {
 			$('#range').html('');
 		}
 
-		$scope.search = angular.copy({});
+		$scope.search 	= angular.copy({});
+		$scope.find		= angular.copy({});
 	}
 });

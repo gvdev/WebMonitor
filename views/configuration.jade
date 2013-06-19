@@ -178,7 +178,7 @@ block content
 										div(class="pull-right")
 											small Quick search
 											input(ng-model="find.$")
-											button(class="btn btn-small btn-primary",type="button",ng-click="logs_refresh()") Refresh
+											button(class="btn btn-small btn-primary",type="button",ng-click="logs_refresh()") Reset
 
 							tbody
 								tr(ng-repeat="log in logs | filter:find",ng:class="{true:'success', false:'error'}[log.success]")
@@ -231,7 +231,6 @@ block content
 							div(class="control-group")
 								div(class="controls")
 									button(type="submit",class="btn btn-small btn-primary",ng-click="a_search(search)") Search
-									button(type="submit",class="btn btn-small btn-danger",ng-click="reset()") Reset
 									br
 									img(src="img/loading.gif",ng-show="loading")
 
