@@ -8,9 +8,10 @@
  * Show all logs of system.
  */
 web_monitor.controller('process_log', function ($scope, $http) {
-	$scope.logs = [];
-	$scope.loading = false;
-	$scope.loading_scroll = false;
+	$scope.logs 			= [];
+	$scope.loading 			= false;
+	$scope.loading_scroll 	= false;
+	$scope.is_infinite 		= true;
 
 	var skip = 11;
 	var limit = 10;
@@ -25,24 +26,26 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	 */
 	$scope.infinite_scroll = function () {
 
-		$scope.loading_scroll = true;
+		if ($scope.is_infinite) {
+			$scope.loading_scroll = true;
 
-		$http.post('/api/log/scroll', {skip: skip, limit: limit}).success(function (data) {
+			$http.post('/api/log/scroll', {skip: skip, limit: limit}).success(function (data) {
 
-			if (data.length > 0) {
-				data.forEach(function(log) {
-					$scope.logs.push(log);
-				});
+				if (data.length > 0) {
+					data.forEach(function(log) {
+						$scope.logs.push(log);
+					});
 
-				skip = skip + 10;
+					skip = skip + 10;
 
-				$scope.loading_scroll = false;
+					$scope.loading_scroll = false;
 
-			} else {
-				$scope.loading_scroll = false;
-				flash_message_launch({ msg: 'For the moment not more logs find.', type: 'success' });
-			}
-		});
+				} else {
+					$scope.loading_scroll = false;
+					flash_message_launch({ msg: 'For the moment not more logs find.', type: 'success' });
+				}
+			});
+		}
 	};
 
 	/**
@@ -50,7 +53,10 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	 */
 	$scope.logs_refresh = function () {
 
-		$scope.loading = true;
+		$scope.loading 		= true;
+
+		// Execute infinite scroll.
+		$scope.is_infinite 	= true;
 
 		var date = new Date();
 		var str_date = date.toString('MM/dd/yyyy');
@@ -74,6 +80,9 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	$scope.a_search = function (search) {
 
 		$scope.loading = true;
+
+		// No execute infinite scroll.
+		$scope.is_infinite = false;
 
 		if ($('#range').html() != '') {
 			if (!search) {
