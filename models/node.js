@@ -6,6 +6,7 @@
 	Schema 		= mongoose.Schema,
 	fs			= require('fs'),
 	exec		= require('child_process').exec,
+	im 			= require('imagemagick'),
 
 	config 		= require('../config.json');
 	
@@ -66,6 +67,14 @@ Node.statics.upload_image = function (data, callback) {
 
 				// Move the file from the temporary location to the intended location.
 				fs.rename(tmp_path, target_path, function (error) {
+					im.resize({
+						srcPath	: target_path,
+						dstPath	: target_path,
+						width	: 100
+					}, function (err, stdout, stderr) {
+						 if (err) throw err
+					});
+					
 					if (!error) {
 						if (!doc) {
 							var new_node = new this_model({
@@ -77,9 +86,9 @@ Node.statics.upload_image = function (data, callback) {
 									name_file	: data.input.file.name
 								}
 							});
-
+							
 							new_node.save(function (error) {
-								if (!error) {
+								if (!error) {									
 									callback(null, { msg: 'Image upload.', type: 'success', node_id: data.node.node_id, image: target_path_public });
 								} else {
 									callback({ msg: 'Error while image upload.', type: 'error' }, null);
@@ -105,6 +114,15 @@ Node.statics.upload_image = function (data, callback) {
 						// Move the file from the temporary location to the intended location.
 						//fs.rename(tmp_path, target_path, function (error) {
 						exec('mv ' + tmp_path + ' ' + target_path, function (error,stdout,stderr) {
+							
+							im.resize({
+								srcPath	: target_path,
+								dstPath	: target_path,
+								width	: 100
+							}, function (err, stdout, stderr) {
+								 if (err) throw err
+							});
+							
 							if (!error) {
 								if (!doc) {
 									var new_node = new this_model({
@@ -118,7 +136,7 @@ Node.statics.upload_image = function (data, callback) {
 									});
 
 									new_node.save(function (error, doc) {
-										if (!error) {
+										if (!error) {											
 											callback(null, { msg: 'Image upload.', type: 'success', node_id: data.node.node_id, image: target_path_public });
 										} else {
 											callback({ msg: 'Error while image upload.', type: 'error' }, null);
