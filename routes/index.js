@@ -33,7 +33,8 @@ module.exports = {
 		log.save('information', req.ip, req.method, 'Access to index page.', object_user);
 
 		res.render('index', {
-			user : object_user
+			user 	: object_user,
+			datetime: Date.now()
 		});
 	},
 
@@ -50,7 +51,8 @@ module.exports = {
 		log.save('information', req.ip, req.method, 'Access to configuration page.', object_user);
 
 		res.render('configuration', {
-			user : object_user
+			user 	: object_user,
+			datetime: Date.now()
 		});
 	},
 

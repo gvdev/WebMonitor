@@ -16,6 +16,11 @@ html(lang="en",ng-app="web_monitor",ng-cloak)
 		// Charisma.
 		link(rel='stylesheet', href='/third-party/charisma/css/charisma-app.css')
 
+		// Epiclock.
+		link(rel='stylesheet', href='/third-party/epiclock/stylesheet/jquery.epiclock.css')
+		link(rel='stylesheet', href='/third-party/epiclock/renderers/retro/epiclock.retro.css')
+		link(rel='stylesheet', href='/third-party/epiclock/renderers/retro-countdown/epiclock.retro-countdown.css')
+
 		link(rel='stylesheet', href='/third-party/jQuery-UI-FileInput/css/enhanced.css')
 		link(rel='stylesheet', href='/third-party/jquery-ui/custom-theme/jquery-ui-1.10.0.custom.css')
 		link(rel='stylesheet', href='/third-party/twitter-bootstrap/css/daterangepicker.css')
@@ -59,6 +64,11 @@ html(lang="en",ng-app="web_monitor",ng-cloak)
 							include ./auth/login
 
 		div(class="container")
+			.navbar
+				.navbar-inner
+					div(class="brand pull-right")
+						dd(epiclock,id="explicit",datetime="'#{datetime}' | date:'MM/dd/yyyy h:mm:ss'")
+
 			block content
 
 		div(id="flash_message")
