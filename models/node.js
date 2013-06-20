@@ -72,7 +72,7 @@ Node.statics.upload_image = function (data, callback) {
 						dstPath	: target_path,
 						width	: 100
 					}, function (err, stdout, stderr) {
-						 if (err) throw err
+						 //if (err) throw err
 					});
 					
 					if (!error) {
@@ -115,48 +115,48 @@ Node.statics.upload_image = function (data, callback) {
 						//fs.rename(tmp_path, target_path, function (error) {
 						exec('mv ' + tmp_path + ' ' + target_path, function (error,stdout,stderr) {
 							
-							im.resize({
+							if (!error) {
+								im.resize({
 								srcPath	: target_path,
 								dstPath	: target_path,
 								width	: 100
 							}, function (err, stdout, stderr) {
-								 if (err) throw err
+								 //if (err) throw err
 							});
 							
-							if (!error) {
-								if (!doc) {
-									var new_node = new this_model({
-										token: data.node.node_id,
-										image: {
-											path		: target_path,
-											path_public	: target_path_public,
-											name		: image_save,
-											name_file	: data.input.file.name
-										}
-									});
+							if (!doc) {
+								var new_node = new this_model({
+									token: data.node.node_id,
+									image: {
+										path		: target_path,
+										path_public	: target_path_public,
+										name		: image_save,
+										name_file	: data.input.file.name
+									}
+								});
 
-									new_node.save(function (error, doc) {
-										if (!error) {											
-											callback(null, { msg: 'Image upload.', type: 'success', node_id: data.node.node_id, image: target_path_public });
-										} else {
-											callback({ msg: 'Error while image upload.', type: 'error' }, null);
-										}
-									});
-								} else {
-									exec('rm ' + doc.image.path, function (error) {
-										if (!error) {
-											doc.image.name_file 	= data.input.file.name;
-											doc.image.path			= target_path;
-											doc.image.path_public 	= target_path_public;
+								new_node.save(function (error, doc) {
+									if (!error) {											
+										callback(null, { msg: 'Image upload.', type: 'success', node_id: data.node.node_id, image: target_path_public });
+									} else {
+										callback({ msg: 'Error while image upload.', type: 'error' }, null);
+									}
+								});
+							} else {
+								exec('rm ' + doc.image.path, function (error) {
+									if (!error) {
+										doc.image.name_file 	= data.input.file.name;
+										doc.image.path			= target_path;
+										doc.image.path_public 	= target_path_public;
 
-											doc.save();
+										doc.save();
 
-											callback(null, { msg: 'Image upload.', type: 'success', node_id: data.node.node_id, image: target_path_public });
-										} else {
-											callback(error, null);
-										}
-									});
-								}
+										callback(null, { msg: 'Image upload.', type: 'success', node_id: data.node.node_id, image: target_path_public });
+									} else {
+										callback(error, null);
+									}
+								});
+							}
 							} else {
 								callback({ msg: 'Error while image upload.', type: 'error' }, null);
 							}
@@ -222,11 +222,22 @@ Node.statics.all = function (callback) {
 Node.statics.reset_image = function (node_id, callback) {
 	var this_model = this;
 
+	/*return this_model.find({
+		token: node_id
+	}, function (error, doc) {
+		if (!error) {
+			doc.remove();
+			callback(null);
+		} else {
+			callback(error);
+		}
+	});*/
+
 	return this_model.remove({
 		token: node_id
 	}, function (error) {
 		if (!error) {
-
+			
 			callback(null);
 		}
 		else {
