@@ -68,7 +68,7 @@ web_monitor.controller('update_node', function ($scope, $element, $compile, $htt
 
 		// If node not found then add in web client.
 		if (exist == false) {
-			$scope.nodes = [];
+			//$scope.nodes = [];
 			// Add new node.
 			$scope.nodes.push(data.line_return);
 		}
@@ -90,6 +90,20 @@ web_monitor.controller('update_node', function ($scope, $element, $compile, $htt
 				node.pwm = data.pwm;
 			}
 		});
+	});
+
+	/**
+	 * Delete node by ID.
+	 */
+	socket.on('delete node', function (data) {
+
+		for (var key in $scope.nodes) {
+
+			if($scope.nodes[key].node_id === data.node_id){
+				$scope.nodes.splice(key, 1);
+			}
+		}
+
 	});
 
 	/**

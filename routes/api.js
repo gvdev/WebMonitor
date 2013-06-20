@@ -251,6 +251,19 @@ module.exports = {
 					// Get node to modify.
 					var line = table[req.body.node_id];
 
+					/**
+					 * Update a only node.
+					 *
+					 * {node: table[NODE ID], update: 0}
+					 *
+					 * node is updated on the Web.
+					 *
+					 * update specifies whether an input is being updated.
+					 * 0 has not changed the status of an input.
+					 * 1 has changed the status of an input.
+					 *
+					 * pwm_update If true only update pwm value in web client.
+					 */
 					new_event.emit('update client', {node: line, update: 0, pwm_update: false});
 				});
 			} else {

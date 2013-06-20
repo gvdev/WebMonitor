@@ -170,11 +170,17 @@ module.exports = {
 				log.save('information', address.address, 'websocket', 'change pwm value of node ' + data.node_id + ' of ' + actual_pwm + ' at ' + data.value + '.', data.user);
 
 				/**
-				 * Update node in web client.
+				 * Update a only node.
 				 *
-				 * node: 		Is a node.
-				 * update: 		If 1 show console.log else not show.
-				 * pwm_update:	If true only update pwm value in web client.
+				 * {node: table[NODE ID], update: 0}
+				 *
+				 * node is updated on the Web.
+				 *
+				 * update specifies whether an input is being updated.
+				 * 0 has not changed the status of an input.
+				 * 1 has changed the status of an input.
+				 *
+				 * pwm_update If true only update pwm value in web client.
 				 */
 				new_event.emit('update client', {node: line, update: 1, pwm_update: true});
 			}
@@ -225,9 +231,12 @@ module.exports = {
 			 * {node: table[NODE ID], update: 0}
 			 *
 			 * node is updated on the Web.
+			 *
 			 * update specifies whether an input is being updated.
 			 * 0 has not changed the status of an input.
 			 * 1 has changed the status of an input.
+			 *
+			 * pwm_update If true only update pwm value in web client.
 			 */
 			new_event.emit('update client', {node: line, update: 1, pwm_update: false});
 		});
