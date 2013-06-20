@@ -36,6 +36,7 @@ var Node = new Schema({
  */
 Node.statics.upload_image = function (data, callback) {
 	var this_model = this;
+	var width = config.image.width;
 
 	return this_model.findOne({
 		token: data.node.node_id
@@ -70,7 +71,7 @@ Node.statics.upload_image = function (data, callback) {
 					im.resize({
 						srcPath	: target_path,
 						dstPath	: target_path,
-						width	: 100
+						width	: width
 					}, function (err, stdout, stderr) {
 						 //if (err) throw err
 					});
@@ -119,7 +120,7 @@ Node.statics.upload_image = function (data, callback) {
 								im.resize({
 								srcPath	: target_path,
 								dstPath	: target_path,
-								width	: 100
+								width	: width
 							}, function (err, stdout, stderr) {
 								 //if (err) throw err
 							});
@@ -222,25 +223,28 @@ Node.statics.all = function (callback) {
 Node.statics.reset_image = function (node_id, callback) {
 	var this_model = this;
 
-	/*return this_model.find({
+	this_model.findOne({
 		token: node_id
 	}, function (error, doc) {
 		if (!error) {
-			doc.remove();
-			callback(null);
-		} else {
-			callback(error);
-		}
-	});*/
-
-	return this_model.remove({
-		token: node_id
-	}, function (error) {
-		if (!error) {
 			
-			callback(null);
-		}
-		else {
+			var path = doc.image.path;
+			
+			return this_model.remove({
+					token: node_id
+			}, function (error, doc) {
+				if (!error) {
+					
+					exec('rm ' + path, function (error) {});
+					
+					callback(null);
+				}
+				else {
+					callback(error);
+				}
+			});
+			
+		} else {
 			callback(error);
 		}
 	});

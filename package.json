@@ -16,7 +16,8 @@
 		"winston"                : "~0.6.2",
 		"serialport"			 : "*",
 		"events"                 : "*",
-		"cron"					 : "*"
+		"cron"					 : "*",
+		"imagemagick"			 : "*"
 	},
 	"engines"     : {
 		"node": "0.6.x",
