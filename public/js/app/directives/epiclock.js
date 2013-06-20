@@ -15,7 +15,7 @@ web_monitor.directive('epiclock', function () {
 			mode	: $.epiclock.modes.explicit,
 			time	: new Date(scope.datetime),
 			format	: "h:i:s a",
-			utc		: false
+			utc		: true
 			//renderer: 'retro'
 		});
 

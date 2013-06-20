@@ -29,9 +29,9 @@ block content
 						strong PWM: &nbsp;
 						h8(id="pwm_{{node.node_id}}",class="text-info") {{node.pwm}}
 						if (user)
-							div(pwm,value="node.pwm",user="'#{user.email}'",node="node.node_id",ng-mouseout="change_value(node, '#{user.email}')")
+							div(pwm,value="node.pwm",user="'#{user.email}'",node="node.node_id",ng-click="change_value(node, '#{user.email}')")
 						else
-							div(pwm,id="pwmm_{{node}}",value="node.pwm",user="",node="node.node_id",ng-mouseout="change_value(node, '')")
+							div(pwm,id="pwmm_{{node}}",value="node.pwm",user="",node="node.node_id",ng-click="change_value(node, '')")
 
 						canvas(gauge,ng-repeat="adc in node.adcs",adc="adc",width="110",height="120")
 					
