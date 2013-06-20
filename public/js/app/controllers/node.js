@@ -76,6 +76,23 @@ web_monitor.controller('update_node', function ($scope, $element, $compile, $htt
 	});
 
 	/**
+	 * Update pwm of node by ID.
+	 */
+	socket.on('update client pwm', function (data) {
+
+		// Search node to update.
+		angular.forEach($scope.nodes, function(node){
+
+			// If node exist then update.
+			if(node.node_id === data.node_id){
+
+				// Update node found.
+				node.pwm = data.pwm;
+			}
+		});
+	});
+
+	/**
 	 * Receive new image to node.
 	 * Refresh in all browsers.
 	 */

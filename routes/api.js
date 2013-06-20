@@ -251,7 +251,7 @@ module.exports = {
 					// Get node to modify.
 					var line = table[req.body.node_id];
 
-					new_event.emit('update client', {node: line, update: 0});
+					new_event.emit('update client', {node: line, update: 0, pwm_update: false});
 				});
 			} else {
 				// Log.
