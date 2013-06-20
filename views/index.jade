@@ -14,10 +14,11 @@ block content
 				.box-content
 					ul(class="dashboard-list")
 						li
-							img(alt="",ng-src="{{node.img}}",class="dashboard-avatar")
+							img(alt="",ng-src="{{node.img}}",class="dashboard-avatar-mod")
 							abbr(title="Last Received",class="initialism") {{node.last_received | date:'MM/dd/yyyy h:mm:ssa'}}
 							p {{node.name}}
-
+					
+					div(style="padding-top: 100px;")
 					.top-block
 						if (user)
 							inputs(input="{{node.inputs}}",node="{{node.node_id}}",info="{{node.inputs_info}}",user="{{'#{user.email}'}}")
