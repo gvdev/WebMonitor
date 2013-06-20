@@ -203,6 +203,7 @@ padding:10px;
 ul.dashboard-list li {
 	padding    : 7px 0;
 	list-style : none;
+	/*height     : 150px;*/
 	/*border-bottom: 1px solid #EBEBEB;*/
 	border-top : 1px solid white;
 }
