@@ -123,4 +123,24 @@ Log.statics.a_search = function (options, callback) {
 	});
 };
 
+/**
+ * Delete logs by range.
+ *
+ * @param options
+ */
+Log.statics.delete_by_range = function (options) {
+	var this_model = this;
+
+	var logs = options.logs;
+
+	for (var key in logs) {
+
+		this_model.remove({
+			_id: logs[key]._id
+		}, function () {
+			//console.log('delete ' + options[key]._id);
+		});
+	}
+};
+
 module.exports = mongoose.model('Log', Log);

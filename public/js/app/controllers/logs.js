@@ -12,6 +12,7 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	$scope.loading 			= false;
 	$scope.loading_scroll 	= false;
 	$scope.is_infinite 		= true;
+	$scope.delete			= false;
 
 	var skip = 11;
 	var limit = 10;
@@ -57,6 +58,7 @@ web_monitor.controller('process_log', function ($scope, $http) {
 
 		// Execute infinite scroll.
 		$scope.is_infinite 	= true;
+		$scope.delete		= false;
 
 		var date = new Date();
 		var str_date = date.toString('MM/dd/yyyy');
@@ -79,10 +81,11 @@ web_monitor.controller('process_log', function ($scope, $http) {
 	 */
 	$scope.a_search = function (search) {
 
-		$scope.loading = true;
+		$scope.loading 		= true;
+		$scope.delete		= true;
 
 		// No execute infinite scroll.
-		$scope.is_infinite = false;
+		$scope.is_infinite 	= false;
 
 		if ($('#range').html() != '') {
 			if (!search) {
@@ -118,5 +121,30 @@ web_monitor.controller('process_log', function ($scope, $http) {
 
 		$scope.search 	= angular.copy({});
 		$scope.find		= angular.copy({});
+	};
+
+	/**
+	 * Delete logs by range.
+	 */
+	$scope.delete_log_by_range = function (search) {
+
+		$scope.loading 	= true;
+
+		if ($('#range').html() != '') {
+			if (!search) {
+				search = {};
+			}
+			search.range = $('#range').html();
+		}
+
+		var send = {
+			logs	: $scope.logs,
+			search	: search
+		};
+
+		$http.post('/api/log/delete_logs', send).success(function (data) {
+			$scope.logs 	= data;
+			$scope.loading 	= false;
+		});
 	}
 });

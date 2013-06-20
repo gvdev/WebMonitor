@@ -71,6 +71,7 @@ module.exports = function (app) {
 	// Logs
 	app.post('/api/log/scroll', ensureAuthenticated, api.post_api_log_scroll);
 	app.post('/api/log/a_search', ensureAuthenticated, api.post_api_log_a_search);
+	app.post('/api/log/delete_logs', ensureAuthenticated, api.post_api_log_delete_by_range);
 
 	// Nodes.
 	app.post('/api/node/reset/image', ensureAuthenticated, api.post_api_node_reset_image);

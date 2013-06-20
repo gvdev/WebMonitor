@@ -191,11 +191,11 @@ block content
 										img(src="img/loading.gif",ng-show="loading_scroll")
 
 						div(infinite-scroll="infinite_scroll()",infinite-scroll-distance="10")
-						
+
 					.span2
 						h5 Advanced Search:
 						form(name="advanced_search")
-							
+
 							div(class="control-group")
 								label(class="control-label") Date range.
 								div(class="controls")
@@ -204,7 +204,7 @@ block content
 										span(id="range")
 										b(lass="caret",style="margin-top: 8px")
 								i(class="icon-remove",ng-click="remove_criteria_date()")
-						
+
 							br
 							br
 							div(class="control-group")
@@ -214,7 +214,7 @@ block content
 										option(value="") Select Type
 										option(value="error") ERROR
 										option(value="information") INFORMATION
-									
+
 							div(class="control-group")
 								label(class="control-label") Method.
 								div(class="controls")
@@ -228,10 +228,23 @@ block content
 								label(class="control-label") IP.
 								div(class="controls")
 									input(type="text",ng-model="search.ip",class="span10")
-									
+
 							div(class="control-group")
 								div(class="controls")
 									button(type="submit",class="btn btn-small btn-primary",ng-click="a_search(search)") Search
+									&nbsp;
+									a(href="#sure_delete",role="button",class="btn btn-small btn-danger",data-toggle="modal",ng-show="delete") Delete
 									br
 									img(src="img/loading.gif",ng-show="loading")
+
+							div(id="sure_delete",class="modal hide fade",tabindex="-1",role="dialog",aria-labelledby="sure_delete",aria-hidden="true")
+								div(class="modal-header btn-danger")
+									button(type="button",class="close",data-dismiss="modal",aria-hidden="true") x
+									h3 Alert
+								div(class="modal-body")
+									h5(class="text-error") You sure execute delete operation?.
+								div(class="modal-footer")
+									button(class="btn",data-dismiss="modal",aria-hidden="true") Close
+									button(class="btn btn-danger",data-dismiss="modal",ng-click="delete_log_by_range(search)") Delete
+
 

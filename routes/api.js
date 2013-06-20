@@ -311,5 +311,25 @@ module.exports = {
 				res.json({});
 			}
 		});
+	},
+
+	/**
+	 * Delete logs by range.
+	 *
+	 * @param req
+	 * @param res
+	 */
+	post_api_log_delete_by_range: function (req, res) {
+
+		Log.delete_by_range(req.body, function () {});
+
+		Log.a_search(req.body.search, function (error, docs) {
+
+			if (!error) {
+				res.json(docs);
+			} else {
+				res.json({});
+			}
+		});
 	}
 };
