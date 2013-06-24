@@ -68,10 +68,13 @@ Node.statics.upload_image = function (data, callback) {
 
 				// Move the file from the temporary location to the intended location.
 				fs.rename(tmp_path, target_path, function (error) {
-					im.resize({
+					im.crop({
 						srcPath	: target_path,
 						dstPath	: target_path,
-						width	: width
+						width: 800,
+						height: 600,
+						quality: 1,
+						gravity: "North"
 					}, function (err, stdout, stderr) {
 						 //if (err) throw err
 					});
@@ -117,10 +120,13 @@ Node.statics.upload_image = function (data, callback) {
 						exec('mv ' + tmp_path + ' ' + target_path, function (error,stdout,stderr) {
 							
 							if (!error) {
-								im.resize({
+								im.crop({
 								srcPath	: target_path,
 								dstPath	: target_path,
-								width	: width
+								width: 800,
+								height: 600,
+								quality: 1,
+								gravity: "North"
 							}, function (err, stdout, stderr) {
 								 //if (err) throw err
 							});
